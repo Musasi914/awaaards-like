@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Geist_Mono, Inter, Noto_Serif } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/app/components/Navbar";
-import LenisProvider from "@/app/provider/LenisProvider";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import Navbar from "@/components/Navbar";
+import LenisProvider from "@/provider/LenisProvider";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -16,6 +11,11 @@ const geistMono = Geist_Mono({
 
 const inter = Inter({
   variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+const notoSerif = Noto_Serif({
+  variable: "--font-noto-serif",
   subsets: ["latin"],
 });
 
@@ -31,7 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${inter.variable} ${geistMono.variable} ${notoSerif.variable} antialiased`}
+      >
         <LenisProvider>
           <Navbar />
           {children}

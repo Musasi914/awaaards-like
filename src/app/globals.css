@@ -1,27 +1,109 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #e1dede;
-  --foreground: #171717;
-  --menu-background: #0f0f0f;
+  --background: #ffffff;
+  --foreground: #212121;
+  --menu-background: #cfcfcf;
   --menu-fg-secondary: #474646;
-  --hamburger-icon-border: rgba(255, 255, 255, 0.2);
+  --hamburger-icon-border: rgba(0, 0, 0, 0.6);
+
+  /* トランジション用の設定 */
+  --transition-duration: 0.3s;
+  --transition-timing: ease-in-out;
+}
+
+/* ダークモード用の色変数 */
+:root[class~="dark"] {
+  --background: #cfcfcf;
+  --foreground: #000000;
+  --menu-background: #ffffff;
+  --menu-fg-secondary: #474646;
+  --hamburger-icon-border: rgba(255, 255, 255, 0.6);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-gold: #cfa355;
   --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-noto-serif);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter);
+  /* ダークモード切り替え時のトランジション */
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background-color var(--transition-duration)
+        var(--transition-timing),
+      color var(--transition-duration) var(--transition-timing);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    transition: background-color var(--transition-duration)
+      var(--transition-timing);
+  }
+}
+
+/* 背景色とテキスト色のトランジション */
+body,
+header,
+nav,
+main,
+section,
+article,
+aside,
+footer,
+div,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+a,
+button,
+input,
+textarea,
+select {
+  @media (prefers-reduced-motion: no-preference) {
+    transition: background-color var(--transition-duration)
+        var(--transition-timing),
+      color var(--transition-duration) var(--transition-timing),
+      border-color var(--transition-duration) var(--transition-timing);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    transition: background-color var(--transition-duration)
+      var(--transition-timing);
+  }
+}
+
+/* トランジションを適用したくない要素 */
+.no-transition,
+.no-transition *,
+canvas,
+video,
+img,
+svg,
+[data-gsap],
+.three-canvas,
+.three-scene {
+  transition: none !important;
 }
 
 @layer components {
+  .font-accent {
+    @apply font-serif font-extralight;
+  }
+
+  .section-space {
+    @apply space-y-52;
+  }
+
   .menu__col {
     @apply flex flex-col gap-2;
   }
@@ -33,4 +115,30 @@ body {
   .menu__col:nth-child(2) {
     @apply flex-2;
   }
+}
+
+@utility banner-text-responsive {
+  @apply text-[60px] sm:text-[80px] md:text-[100px] lg:text-[120px] leading-[0.77em];
+}
+
+@utility section-title {
+  @apply text-[60px] sm:text-[80px] md:text-[100px] lg:text-[120px] leading-[0.77em] font-serif font-extralight;
+}
+
+@utility text-sub {
+  @apply text-[30px] sm:text-[34px] md:text-[38px] lg:text-[44px];
+}
+
+@utility wrapper {
+  @apply container p-4 mx-auto;
+}
+
+@utility umt-2 {
+  @apply mt-2 md:mt-5;
+}
+@utility umt-4 {
+  @apply mt-4 md:mt-10;
+}
+@utility umt-8 {
+  @apply mt-8 md:mt-20;
 }
