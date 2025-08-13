@@ -1,13 +1,9 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useModelLoading } from "@/components/ModelLoadingProvider";
-
-gsap.registerPlugin(ScrollTrigger);
+import useScrollTrigger from "@/hooks/useScrollTrigger";
 
 export default function AnimatedTextLines({
   texts,
@@ -20,6 +16,7 @@ export default function AnimatedTextLines({
   delay?: number;
   isScrollTrigger?: boolean;
 }) {
+  const { useGSAP, gsap, ScrollTrigger } = useScrollTrigger();
   const appendClass = [];
   className && appendClass.push(className);
 
@@ -46,13 +43,13 @@ export default function AnimatedTextLines({
     if (isScrollTrigger) {
       ScrollTrigger.create({
         trigger: textRefs.current,
-        start: "top 85%",
+        start: "top 95%",
         animation: textAnimation,
       });
     } else {
       textAnimation.play();
     }
-  }, [delay, shouldStartAnimations]); // shouldStartAnimationsを依存配列に追加
+  }, [shouldStartAnimations]); // delayを削除し、shouldStartAnimationsのみに依存
 
   return (
     <p className={appendClass.join(" ")}>

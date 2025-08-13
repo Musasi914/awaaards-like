@@ -1,10 +1,9 @@
 "use client";
 
 import ClipUpText from "@/components/ui/ClipUpText";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import { useRef } from "react";
 import { useModelLoading } from "@/components/ModelLoadingProvider";
+import useScrollTrigger from "@/hooks/useScrollTrigger";
 
 export default function Title({
   className,
@@ -16,7 +15,7 @@ export default function Title({
   const titleRef = useRef<HTMLDivElement>(null);
   const subTitleRef = useRef<HTMLDivElement>(null);
   const { shouldStartAnimations } = useModelLoading();
-
+  const { useGSAP, gsap } = useScrollTrigger();
   useGSAP(() => {
     if (!shouldStartAnimations) return;
 
@@ -34,6 +33,7 @@ export default function Title({
   return (
     <hgroup className="flex flex-col-reverse gap-3 px-4 md:px-10 [clip-path:polygon(0_0,100%_0,100%_100%,0_100%)] text-right">
       <h1
+        id="hero-title"
         ref={titleRef}
         className="fadeText uppercase banner-text-responsive tracking-tighter font-accent"
       >

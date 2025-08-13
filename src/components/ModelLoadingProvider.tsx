@@ -1,6 +1,13 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useMemo,
+  useCallback,
+} from "react";
 
 interface ModelLoadingContextType {
   isModelLoaded: boolean;
@@ -35,7 +42,7 @@ export default function ModelLoadingProvider({
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [shouldStartAnimations, setShouldStartAnimations] = useState(false);
 
-  const setModelLoaded = (loaded: boolean) => {
+  const setModelLoaded = useCallback((loaded: boolean) => {
     setIsModelLoaded(loaded);
     if (loaded) {
       setLoadingProgress(100);
@@ -44,15 +51,18 @@ export default function ModelLoadingProvider({
         setShouldStartAnimations(true);
       }, 100);
     }
-  };
+  }, []);
 
-  const value = {
-    isModelLoaded,
-    setModelLoaded,
-    loadingProgress,
-    setLoadingProgress,
-    shouldStartAnimations,
-  };
+  const value = useMemo(
+    () => ({
+      isModelLoaded,
+      setModelLoaded,
+      loadingProgress,
+      setLoadingProgress,
+      shouldStartAnimations,
+    }),
+    [isModelLoaded, setModelLoaded, loadingProgress, shouldStartAnimations]
+  );
 
   return (
     <ModelLoadingContext.Provider value={value}>

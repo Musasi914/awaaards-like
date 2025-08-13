@@ -3,14 +3,14 @@
 import { Canvas } from "@react-three/fiber";
 import Scene from "./Scene";
 import { useEffect, useRef, useState } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import { useModelLoading } from "@/components/ModelLoadingProvider";
+import { PerformanceMonitor } from "@react-three/drei";
+import useScrollTrigger from "@/hooks/useScrollTrigger";
 
 export default function Canvas3d() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { shouldStartAnimations } = useModelLoading();
-
+  const { useGSAP, gsap } = useScrollTrigger();
   useGSAP(() => {
     if (!shouldStartAnimations) return;
 
@@ -32,6 +32,8 @@ export default function Canvas3d() {
     return () => observer.disconnect();
   }, []);
 
+  const [dpr, setDpr] = useState(1.5);
+
   return (
     <figure className="absolute inset-0 -z-10 min-h-screen h-[110vw]">
       <Canvas
@@ -41,10 +43,13 @@ export default function Canvas3d() {
         gl={{
           stencil: false,
         }}
-        dpr={[1, 2]}
-        performance={{ min: 0.5 }}
+        dpr={dpr}
         frameloop={visible ? "always" : "never"}
       >
+        <PerformanceMonitor
+          onIncline={() => setDpr(2)}
+          onDecline={() => setDpr(1)}
+        ></PerformanceMonitor>
         <Scene />
       </Canvas>
     </figure>

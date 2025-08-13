@@ -1,14 +1,10 @@
 "use client";
 
 import { useRef, useState } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { SplitText } from "gsap/SplitText";
 import { useLenis } from "../provider/LenisProvider";
 import Image from "next/image";
 import Link from "next/link";
-
-gsap.registerPlugin(SplitText);
+import useScrollTrigger from "@/hooks/useScrollTrigger";
 
 // メニューアイテムの型定義
 interface MenuItem {
@@ -42,7 +38,7 @@ const TAG_ITEMS: TagItem[] = [
 export default function Navbar() {
   const lenisRef = useLenis();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const { useGSAP, gsap, SplitText } = useScrollTrigger();
   // Refs
   const menuOverlayRef = useRef<HTMLDivElement>(null);
   const menuMediaWrapperRef = useRef<HTMLDivElement>(null);

@@ -1,12 +1,12 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
 import { useModelLoading } from "./ModelLoadingProvider";
-import gsap from "gsap";
 import { useRef } from "react";
+import useScrollTrigger from "@/hooks/useScrollTrigger";
 
 export default function ModelLoadingOverlay() {
   const { isModelLoaded } = useModelLoading();
+  const { useGSAP, gsap } = useScrollTrigger();
 
   const ref = useRef<HTMLDivElement>(null);
   useGSAP(() => {

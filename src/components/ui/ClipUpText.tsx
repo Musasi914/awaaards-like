@@ -1,11 +1,9 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useModelLoading } from "@/components/ModelLoadingProvider";
+import useScrollTrigger from "@/hooks/useScrollTrigger";
 
 export default function ClipUpText({
   children,
@@ -21,13 +19,13 @@ export default function ClipUpText({
   const textRef = useRef<HTMLSpanElement>(null);
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const { shouldStartAnimations } = useModelLoading();
-
+  const { useGSAP, gsap, ScrollTrigger } = useScrollTrigger();
   useGSAP(() => {
     if (isMobile || !shouldStartAnimations) return;
     const textAnimation = gsap.from(textRef.current, {
       yPercent: 105,
       delay,
-      duration: 1,
+      duration: 0.6,
       paused: true,
     });
 
@@ -36,13 +34,13 @@ export default function ClipUpText({
 
       ScrollTrigger.create({
         trigger: textRef.current,
-        start: "top 85%",
+        start: "top 95%",
         onEnter: () => textAnimation.play(),
       });
     } else {
       textAnimation.play();
     }
-  }, [shouldStartAnimations]);
+  }, [shouldStartAnimations, delay]);
 
   const appendClass = [];
   className && appendClass.push(className);

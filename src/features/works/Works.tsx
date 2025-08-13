@@ -4,12 +4,10 @@ import AnimatedTextLines from "@/components/ui/AnimatedTextLines";
 import ClipUpText from "@/components/ui/ClipUpText";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { projects } from "@/constants";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { useRef, useState } from "react";
-
+import useScrollTrigger from "@/hooks/useScrollTrigger";
 export default function Works() {
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const previewRef = useRef<HTMLDivElement>(null);
@@ -22,7 +20,7 @@ export default function Works() {
     x: 0,
     y: 0,
   });
-
+  const { useGSAP, gsap } = useScrollTrigger();
   useGSAP(() => {
     moveX.current = gsap.quickTo(previewRef.current, "x");
     moveY.current = gsap.quickTo(previewRef.current, "y");
@@ -61,8 +59,10 @@ export default function Works() {
   };
 
   return (
-    <section className="wrapper" ref={wrapperRef}>
-      <SectionTitle isScrollTrigger={true}>Works</SectionTitle>
+    <section className="wrapper" ref={wrapperRef} aria-labelledby="works-title">
+      <SectionTitle id="works-title" isScrollTrigger={true}>
+        Works
+      </SectionTitle>
       <AnimatedTextLines
         texts={[
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, aut!",
@@ -81,23 +81,19 @@ export default function Works() {
                 className="relative flex flex-col gap-1 py-5 cursor-pointer md:gap-0 group"
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={() => handleMouseLeave()}
+                aria-labelledby={`works-${project.name}`}
               >
                 {/* title */}
                 <div className="flex justify-between items-center transition-all duration-500 md:group-hover:opacity-50">
-                  <h3 className="font-accent text-sub-jp">
-                    <ClipUpText
-                      isScrollTrigger={
-                        index + 1 !== projects.length ? true : false
-                      }
-                    >
+                  <h3
+                    className="font-accent text-sub-jp"
+                    id={`works-${project.name}`}
+                  >
+                    <ClipUpText isScrollTrigger={true}>
                       {project.name}
                     </ClipUpText>
                   </h3>
-                  <ClipUpText
-                    isScrollTrigger={
-                      index + 1 !== projects.length ? true : false
-                    }
-                  >
+                  <ClipUpText isScrollTrigger={true}>
                     <ArrowUpRight />
                   </ClipUpText>
                 </div>
@@ -105,7 +101,7 @@ export default function Works() {
                 <div className="h-px w-full bg-foreground" />
                 {/* frameworks */}
                 <AnimatedTextLines
-                  isScrollTrigger={index + 1 !== projects.length ? true : false}
+                  isScrollTrigger={true}
                   texts={project.frameworks.map((framework) => framework.name)}
                   className="flex gap-x-5 transition-colors duration-500 md:group-hover:opacity-50"
                 />

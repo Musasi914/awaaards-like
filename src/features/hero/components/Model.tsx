@@ -6,10 +6,9 @@ Source: https://sketchfab.com/3d-models/sphere-and-rotated-rings-51792914ce6c442
 Title: Sphere and rotated rings
 */
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useMemo } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
 import { Group, Mesh, MeshStandardMaterial } from "three";
-import { useFrame } from "@react-three/fiber";
 
 export default function Model(props: {
   position: [number, number, number];
@@ -17,16 +16,20 @@ export default function Model(props: {
 }) {
   const group = useRef<Group>(null);
   const { nodes, materials, animations } = useGLTF(
-    "model//sphere_and_rotated_rings.glb"
+    "model/sphere_and_rotated_rings.glb"
   );
   const { actions } = useAnimations(animations, group);
 
-  // 新しいマテリアルを作成
-  const customMaterial = new MeshStandardMaterial({
-    color: "#ffeca1", // 赤色に変更（お好みの色に変更可能）
-    metalness: 1,
-    roughness: 0.08,
-  });
+  // 新しいマテリアルを作成（useMemoで最適化）
+  const customMaterial = useMemo(
+    () =>
+      new MeshStandardMaterial({
+        color: "#ffeca1", // 赤色に変更（お好みの色に変更可能）
+        metalness: 1,
+        roughness: 0.08,
+      }),
+    []
+  );
 
   useEffect(() => {
     if (actions.CINEMA_4D_Main) {
@@ -166,4 +169,4 @@ export default function Model(props: {
   );
 }
 
-useGLTF.preload("model//sphere_and_rotated_rings.glb");
+useGLTF.preload("model/sphere_and_rotated_rings.glb");

@@ -7,8 +7,10 @@ import ServiceWrapper from "./ServiceWrapper";
 export default function Service() {
   return (
     <ServiceWrapper>
-      <section className="wrapper">
-        <SectionTitle isScrollTrigger={true}>Service</SectionTitle>
+      <section className="wrapper" aria-labelledby="service-title">
+        <SectionTitle id="service-title" isScrollTrigger={true}>
+          Service
+        </SectionTitle>
         <AnimatedTextLines
           texts={[
             "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
@@ -22,6 +24,7 @@ export default function Service() {
           {servicesData.map((service, index) => (
             <section
               key={service.title}
+              aria-labelledby={`service-${service.title}`}
               className={`sticky bg-background px-4 py-4 pb-10 md:py-10 md:pb-20 ${
                 index === 0 ? "top-[5rem]" : "border-t"
               } ${
@@ -37,7 +40,10 @@ export default function Service() {
               }`}
             >
               <div>
-                <h3 className="text-sub font-accent">
+                <h3
+                  className="text-sub font-accent"
+                  id={`service-${service.title}`}
+                >
                   <ClipUpText isScrollTrigger={true}>
                     {service.title}
                   </ClipUpText>

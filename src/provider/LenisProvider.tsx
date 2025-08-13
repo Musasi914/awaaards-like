@@ -2,8 +2,7 @@
 
 import { LenisRef, ReactLenis } from "lenis/react";
 import { useEffect, useRef, createContext, useContext } from "react";
-import gsap from "gsap";
-
+import useScrollTrigger from "@/hooks/useScrollTrigger";
 // Lenisコンテキストを作成
 const LenisContext = createContext<React.RefObject<LenisRef | null> | null>(
   null
@@ -24,7 +23,7 @@ export default function LenisProvider({
   children: React.ReactNode;
 }) {
   const lenisRef = useRef<LenisRef | null>(null);
-
+  const { gsap } = useScrollTrigger();
   useEffect(() => {
     function update(time: any) {
       lenisRef.current?.lenis?.raf(time * 1000);
@@ -39,7 +38,7 @@ export default function LenisProvider({
     <ReactLenis
       root
       options={{
-        duration: 1.2,
+        // duration: 1.2,
         touchMultiplier: 2,
       }}
       ref={lenisRef}

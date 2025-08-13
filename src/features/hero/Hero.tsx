@@ -11,7 +11,10 @@ const aboutTexts = [
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col justify-end">
+    <section
+      className="relative min-h-screen flex flex-col justify-end"
+      aria-labelledby="hero-title"
+    >
       <div className="w-full max-w-none md:max-w-11/12 mx-auto pb-20 md:pb-10">
         <Title delay={0.8} />
         <Line />
