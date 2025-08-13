@@ -15,7 +15,7 @@
 
 /* ダークモード用の色変数 */
 :root[class~="dark"] {
-  --background: #ffe062;
+  --background: #eaeaea;
   --foreground: #000000;
   --menu-background: #ffffff;
   --menu-fg-secondary: #474646;
@@ -101,11 +101,11 @@ svg,
   }
 
   .section-space {
-    @apply space-y-52;
+    @apply space-y-24 md:space-y-52;
   }
 
   .menu__col {
-    @apply flex flex-col gap-2;
+    @apply flex flex-col md:gap-2;
   }
 
   .menu__col:nth-child(1) {
@@ -126,10 +126,10 @@ svg,
 }
 
 @utility text-sub {
-  @apply text-[30px] sm:text-[34px] md:text-[38px] lg:text-[44px];
+  @apply text-[25px] sm:text-[34px] md:text-[38px] lg:text-[44px];
 }
 @utility text-sub-jp {
-  @apply text-[26px] sm:text-[30px] md:text-[28px] lg:text-[32px];
+  @apply text-[22px] sm:text-[30px] md:text-[28px] lg:text-[32px];
 }
 
 @utility wrapper {

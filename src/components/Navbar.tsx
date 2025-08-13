@@ -145,7 +145,7 @@ export default function Navbar() {
         <div key={item.id} className="menu__link">
           <Link
             href={item.href}
-            className="text-5xl md:text-6xl font-accent leading-tight"
+            className="text-4xl md:text-6xl font-accent leading-tight transition-opacity hover:opacity-50"
           >
             {item.label}
           </Link>
@@ -159,9 +159,12 @@ export default function Navbar() {
     <div ref={copyContainersRef} className="menu__col">
       {TAG_ITEMS.map((item) => (
         <div key={item.id} className="menu__tag">
-          <a href={item.href} className="text-xl md:text-2xl">
+          <Link
+            href={item.href}
+            className="text-lg md:text-2xl transition-opacity hover:opacity-50"
+          >
             {item.label}
-          </a>
+          </Link>
         </div>
       ))}
     </div>
@@ -239,14 +242,14 @@ export default function Navbar() {
           </div>
 
           {/* コンテンツセクション */}
-          <nav className="menu__content-wrapper flex-3 relative flex text-[var(--menu-fg-secondary)]">
-            <div className="menu__content-main absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full md:w-3/4 p-16 flex flex-col md:flex-row md:items-end gap-8">
+          <nav className="flex-3 relative flex text-[var(--menu-fg-secondary)]">
+            <div className="absolute md:top-1/2 left-1/2 -translate-x-1/2 md:-translate-y-1/2 w-full md:w-3/4 p-16 md:p-0 lg:p-16 flex flex-col md:flex-row md:items-end gap-8">
               {renderMenuItems()}
               {renderTagItems()}
             </div>
 
             {/* フッター */}
-            <div className="menu__footer mx-auto w-full md:w-3/4 p-16 flex items-end gap-8">
+            <div className="mx-auto w-full md:w-3/4 p-16 pb-24 md:pb-16 flex items-end gap-8">
               <div ref={copyContainersRef} className="menu__col">
                 <p>Toronto, Canada</p>
               </div>

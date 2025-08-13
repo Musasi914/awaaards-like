@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
+import { useMediaQuery } from "react-responsive";
 
 export default function ClipUpText({
   children,
@@ -17,7 +18,9 @@ export default function ClipUpText({
   isScrollTrigger?: boolean;
 }) {
   const textRef = useRef<HTMLSpanElement>(null);
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   useGSAP(() => {
+    if (isMobile) return;
     const textAnimation = gsap.from(textRef.current, {
       yPercent: 105,
       delay,

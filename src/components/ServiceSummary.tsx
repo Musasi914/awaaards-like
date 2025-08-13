@@ -21,7 +21,7 @@ export default function ServiceSummary() {
         trigger: sectionRef.current,
         start: "top bottom",
         end: "bottom top",
-        scrub: true,
+        scrub: 1,
       },
     });
 

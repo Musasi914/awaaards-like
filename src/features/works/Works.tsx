@@ -85,11 +85,19 @@ export default function Works() {
                 {/* title */}
                 <div className="flex justify-between items-center transition-all duration-500 md:group-hover:opacity-50">
                   <h3 className="font-accent text-sub-jp">
-                    <ClipUpText isScrollTrigger={true}>
+                    <ClipUpText
+                      isScrollTrigger={
+                        index + 1 !== projects.length ? true : false
+                      }
+                    >
                       {project.name}
                     </ClipUpText>
                   </h3>
-                  <ClipUpText isScrollTrigger={true}>
+                  <ClipUpText
+                    isScrollTrigger={
+                      index + 1 !== projects.length ? true : false
+                    }
+                  >
                     <ArrowUpRight />
                   </ClipUpText>
                 </div>
@@ -97,7 +105,7 @@ export default function Works() {
                 <div className="h-px w-full bg-foreground" />
                 {/* frameworks */}
                 <AnimatedTextLines
-                  isScrollTrigger={true}
+                  isScrollTrigger={index + 1 !== projects.length ? true : false}
                   texts={project.frameworks.map((framework) => framework.name)}
                   className="flex gap-x-5 transition-colors duration-500 md:group-hover:opacity-50"
                 />

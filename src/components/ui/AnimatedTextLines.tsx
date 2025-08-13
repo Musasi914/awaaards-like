@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
+import { useMediaQuery } from "react-responsive";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,8 +24,10 @@ export default function AnimatedTextLines({
 
   // 各テキスト要素への参照を配列で管理
   const textRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   useGSAP(() => {
+    if (isMobile) return;
     // nullでない要素のみをフィルタリング
     const validRefs = textRefs.current.filter(Boolean);
 
