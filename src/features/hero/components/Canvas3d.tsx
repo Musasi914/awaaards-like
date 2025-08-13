@@ -5,17 +5,22 @@ import Scene from "./Scene";
 import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useModelLoading } from "@/components/ModelLoadingProvider";
 
 export default function Canvas3d() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { shouldStartAnimations } = useModelLoading();
+
   useGSAP(() => {
+    if (!shouldStartAnimations) return;
+
     gsap.from(canvasRef.current, {
       opacity: 0,
       duration: 1,
       delay: 1.7,
       ease: "power2.inOut",
     });
-  }, []);
+  }, [shouldStartAnimations]);
 
   const [visible, setVisible] = useState(true);
   useEffect(() => {

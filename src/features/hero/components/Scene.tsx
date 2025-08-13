@@ -2,16 +2,18 @@ import {
   ContactShadows,
   Environment,
   Float,
-  Lightformer,
   OrbitControls,
 } from "@react-three/drei";
 import Model from "@/features/hero/components/Model";
 import { useMediaQuery } from "react-responsive";
+import ModelProgressTracker from "@/components/ModelProgressTracker";
+
 export default function () {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   return (
     <>
+      <ModelProgressTracker />
       <OrbitControls />
       <Float
         // rotationIntensity={isMobile ? 2 : 4}

@@ -3,6 +3,8 @@ import { Geist_Mono, Inter, Noto_Serif } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import LenisProvider from "@/provider/LenisProvider";
+import ModelLoadingProvider from "@/components/ModelLoadingProvider";
+import ModelLoadingOverlay from "@/components/ModelLoadingOverlay";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -35,8 +37,11 @@ export default function RootLayout({
         className={`${inter.variable} ${geistMono.variable} ${notoSerif.variable} antialiased`}
       >
         <LenisProvider>
-          <Navbar />
-          {children}
+          <ModelLoadingProvider>
+            <ModelLoadingOverlay />
+            <Navbar />
+            {children}
+          </ModelLoadingProvider>
         </LenisProvider>
       </body>
     </html>

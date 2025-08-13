@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
+import { useModelLoading } from "@/components/ModelLoadingProvider";
 
 export default function Line({
   isScrollTrigger = false,
@@ -11,7 +12,11 @@ export default function Line({
   isScrollTrigger?: boolean;
 }) {
   const lineRef = useRef<HTMLDivElement>(null);
+  const { shouldStartAnimations } = useModelLoading();
+
   useGSAP(() => {
+    if (!shouldStartAnimations) return;
+
     const lineAnimation = gsap.fromTo(
       lineRef.current,
       {
@@ -35,6 +40,6 @@ export default function Line({
     } else {
       lineAnimation.play();
     }
-  }, []);
+  }, [shouldStartAnimations]);
   return <div ref={lineRef} className="border-t-2 absolute inset-x-0" />;
 }

@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
+import { useModelLoading } from "@/components/ModelLoadingProvider";
 
 export default function ClipUpText({
   children,
@@ -19,8 +20,10 @@ export default function ClipUpText({
 }) {
   const textRef = useRef<HTMLSpanElement>(null);
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+  const { shouldStartAnimations } = useModelLoading();
+
   useGSAP(() => {
-    if (isMobile) return;
+    if (isMobile || !shouldStartAnimations) return;
     const textAnimation = gsap.from(textRef.current, {
       yPercent: 105,
       delay,
@@ -39,7 +42,7 @@ export default function ClipUpText({
     } else {
       textAnimation.play();
     }
-  }, []);
+  }, [shouldStartAnimations]);
 
   const appendClass = [];
   className && appendClass.push(className);

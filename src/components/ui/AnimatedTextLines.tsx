@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
+import { useModelLoading } from "@/components/ModelLoadingProvider";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,9 +26,10 @@ export default function AnimatedTextLines({
   // 各テキスト要素への参照を配列で管理
   const textRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+  const { shouldStartAnimations } = useModelLoading();
 
   useGSAP(() => {
-    if (isMobile) return;
+    if (isMobile || !shouldStartAnimations) return;
     // nullでない要素のみをフィルタリング
     const validRefs = textRefs.current.filter(Boolean);
 
@@ -50,7 +52,7 @@ export default function AnimatedTextLines({
     } else {
       textAnimation.play();
     }
-  }, [delay]); // delayを依存配列に追加
+  }, [delay, shouldStartAnimations]); // shouldStartAnimationsを依存配列に追加
 
   return (
     <p className={appendClass.join(" ")}>
