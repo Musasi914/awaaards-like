@@ -4,7 +4,6 @@ import ServiceSummary from "@/components/ServiceSummary";
 import Works from "@/features/works/Works";
 
 export default function Home() {
-  console.log("first");
   return (
     <main className="relative section-space">
       <Hero />

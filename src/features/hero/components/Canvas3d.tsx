@@ -2,7 +2,7 @@
 
 import { Canvas } from "@react-three/fiber";
 import Scene from "./Scene";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
@@ -17,17 +17,28 @@ export default function Canvas3d() {
     });
   }, []);
 
+  const [visible, setVisible] = useState(true);
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setVisible(entry.isIntersecting);
+    });
+    observer.observe(canvasRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <figure className="absolute inset-0 -z-10">
+    <figure className="absolute inset-0 -z-10 min-h-screen h-[110vw]">
       <Canvas
         ref={canvasRef}
         shadows
-        camera={{ fov: 45, near: 0.1, far: 100, position: [0, 0, 15] }}
+        camera={{ fov: 45, near: 0.1, far: 100, position: [0, 8, 20] }}
         gl={{
           stencil: false,
         }}
         dpr={[1, 2]}
         performance={{ min: 0.5 }}
+        frameloop={visible ? "always" : "never"}
       >
         <Scene />
       </Canvas>

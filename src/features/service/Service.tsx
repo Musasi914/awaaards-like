@@ -15,7 +15,7 @@ export default function Service() {
             "Consequatur quo quis culpa voluptates aperiam quos animi,",
             "dolorem perspiciatis iure distinctio sunt repellendus.",
           ]}
-          className="text-right ml-auto md:w-3/4 umt-4"
+          className="md:text-right ml-auto md:w-3/4 umt-4"
           isScrollTrigger={true}
         />
         <div className="umt-8">

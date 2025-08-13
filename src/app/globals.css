@@ -15,7 +15,7 @@
 
 /* ダークモード用の色変数 */
 :root[class~="dark"] {
-  --background: #cfcfcf;
+  --background: #ffe062;
   --foreground: #000000;
   --menu-background: #ffffff;
   --menu-fg-secondary: #474646;
@@ -127,6 +127,9 @@ svg,
 
 @utility text-sub {
   @apply text-[30px] sm:text-[34px] md:text-[38px] lg:text-[44px];
+}
+@utility text-sub-jp {
+  @apply text-[26px] sm:text-[30px] md:text-[28px] lg:text-[32px];
 }
 
 @utility wrapper {

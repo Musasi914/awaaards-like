@@ -8,7 +8,8 @@ Title: Sphere and rotated rings
 
 import React, { useEffect, useRef } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
-import { Group, MeshStandardMaterial } from "three";
+import { Group, Mesh, MeshStandardMaterial } from "three";
+import { useFrame } from "@react-three/fiber";
 
 export default function Model(props: {
   position: [number, number, number];
@@ -56,7 +57,7 @@ export default function Model(props: {
                     name="Sphere_Mat1_0"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Sphere_Mat1_0.geometry}
+                    geometry={(nodes.Sphere_Mat1_0 as Mesh).geometry}
                     material={materials["Mat.1"]}
                   />
                 </group>
@@ -65,7 +66,7 @@ export default function Model(props: {
                     name="Tube_Mat_0"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Tube_Mat_0.geometry}
+                    geometry={(nodes.Tube_Mat_0 as Mesh).geometry}
                     material={customMaterial}
                   />
                 </group>
@@ -78,7 +79,7 @@ export default function Model(props: {
                     name="Tube_1_Mat_0"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Tube_1_Mat_0.geometry}
+                    geometry={(nodes.Tube_1_Mat_0 as Mesh).geometry}
                     material={materials.material}
                   />
                 </group>
@@ -87,7 +88,7 @@ export default function Model(props: {
                     name="Tube_2_Mat_0"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Tube_2_Mat_0.geometry}
+                    geometry={(nodes.Tube_2_Mat_0 as Mesh).geometry}
                     material={materials.material}
                   />
                 </group>
@@ -100,7 +101,7 @@ export default function Model(props: {
                     name="Tube_3_Mat_0"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Tube_3_Mat_0.geometry}
+                    geometry={(nodes.Tube_3_Mat_0 as Mesh).geometry}
                     material={materials.material}
                   />
                 </group>
@@ -113,7 +114,7 @@ export default function Model(props: {
                     name="Tube_4_Mat_0"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Tube_4_Mat_0.geometry}
+                    geometry={(nodes.Tube_4_Mat_0 as Mesh).geometry}
                     material={materials.material}
                   />
                 </group>
@@ -126,7 +127,7 @@ export default function Model(props: {
                     name="Tube_6_Mat_0"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Tube_6_Mat_0.geometry}
+                    geometry={(nodes.Tube_6_Mat_0 as Mesh).geometry}
                     material={materials.material}
                   />
                 </group>
@@ -139,7 +140,7 @@ export default function Model(props: {
                     name="Tube_5_Mat_0"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Tube_5_Mat_0.geometry}
+                    geometry={(nodes.Tube_5_Mat_0 as Mesh).geometry}
                     material={materials.material}
                   />
                 </group>
@@ -152,7 +153,7 @@ export default function Model(props: {
                     name="Tube_7_Mat_0"
                     castShadow
                     receiveShadow
-                    geometry={nodes.Tube_7_Mat_0.geometry}
+                    geometry={(nodes.Tube_7_Mat_0 as Mesh).geometry}
                     material={materials.material}
                   />
                 </group>

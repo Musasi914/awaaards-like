@@ -41,7 +41,7 @@ export default function AnimatedTextLines({
     if (isScrollTrigger) {
       ScrollTrigger.create({
         trigger: textRefs.current,
-        start: "top 80%",
+        start: "top 85%",
         animation: textAnimation,
       });
     } else {

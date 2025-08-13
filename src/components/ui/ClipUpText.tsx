@@ -30,7 +30,7 @@ export default function ClipUpText({
 
       ScrollTrigger.create({
         trigger: textRef.current,
-        start: "top 80%",
+        start: "top 85%",
         onEnter: () => textAnimation.play(),
       });
     } else {
