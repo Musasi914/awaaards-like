@@ -49,8 +49,7 @@ export default function Works() {
     if (window.innerWidth < 768) return;
     mouse.current.x =
       e.clientX / 2 + (wrapperRef.current?.offsetWidth ?? 0) / 2;
-    mouse.current.y =
-      e.clientY / 2 + (wrapperRef.current?.offsetHeight ?? 0) / 2;
+    mouse.current.y = e.clientY / 2 + window.innerHeight / 2;
     moveX.current?.(mouse.current.x);
     moveY.current?.(mouse.current.y);
 
