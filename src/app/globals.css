@@ -15,11 +15,11 @@
 
 /* ダークモード用の色変数 */
 :root[class~="dark"] {
-  --background: #eaeaea;
-  --foreground: #000000;
-  --menu-background: #ffffff;
-  --menu-fg-secondary: #474646;
-  --hamburger-icon-border: rgba(255, 255, 255, 0.6);
+  --background: #212121;
+  --foreground: #ffffff;
+  --menu-background: #474646;
+  --menu-fg-secondary: #ffffff;
+  --hamburger-icon-border: rgba(255, 255, 255, 0.3);
 }
 
 @theme inline {

@@ -3,6 +3,7 @@ import {
   Environment,
   Float,
   OrbitControls,
+  SoftShadows,
 } from "@react-three/drei";
 import Model from "@/features/hero/components/Model";
 import { useMediaQuery } from "react-responsive";
@@ -13,11 +14,11 @@ export default function () {
 
   return (
     <>
+      <fog attach="fog" args={["#c6c6c6", 21, 27]} />
       <ModelProgressTracker />
       <OrbitControls />
       <Float
-        // rotationIntensity={isMobile ? 2 : 4}
-        speed={isMobile ? 0.5 : 1}
+        speed={isMobile ? 0.5 : 2}
         floatingRange={isMobile ? [0.1, 0.1] : [0.2, 0.2]}
       >
         <Model

@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { useModelLoading } from "@/components/ModelLoadingProvider";
 import { PerformanceMonitor } from "@react-three/drei";
 import useScrollTrigger from "@/hooks/useScrollTrigger";
+import { Perf } from "r3f-perf";
 
 export default function Canvas3d() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -39,15 +40,16 @@ export default function Canvas3d() {
       <Canvas
         ref={canvasRef}
         shadows
-        camera={{ fov: 45, near: 0.1, far: 100, position: [0, 8, 20] }}
+        camera={{ fov: 45, near: 0.1, far: 30, position: [0, 8, 20] }}
         gl={{
           stencil: false,
         }}
         dpr={dpr}
         frameloop={visible ? "always" : "never"}
       >
+        <Perf position="bottom-left" />
         <PerformanceMonitor
-          onIncline={() => setDpr(2)}
+          onIncline={() => setDpr(1.5)}
           onDecline={() => setDpr(1)}
         ></PerformanceMonitor>
         <Scene />
