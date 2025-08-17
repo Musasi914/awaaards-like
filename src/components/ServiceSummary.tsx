@@ -11,7 +11,7 @@ export default function ServiceSummary() {
   const titleService4Ref = useRef<HTMLDivElement>(null);
   const titleService5Ref = useRef<HTMLDivElement>(null);
 
-  const { useGSAP, ScrollTrigger, gsap } = useScrollTrigger();
+  const { useGSAP, gsap } = useScrollTrigger();
 
   useGSAP(() => {
     const tl = gsap.timeline({

@@ -3,7 +3,6 @@ import {
   Environment,
   Float,
   OrbitControls,
-  SoftShadows,
 } from "@react-three/drei";
 import Model from "@/features/hero/components/Model";
 import { useMediaQuery } from "react-responsive";
@@ -11,7 +10,6 @@ import ModelProgressTracker from "@/components/ModelProgressTracker";
 
 export default function () {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
-
   return (
     <>
       <fog attach="fog" args={["#c6c6c6", 21, 27]} />
@@ -33,7 +31,6 @@ export default function () {
         position={isMobile ? [0, -2, 0] : [0, -4, 0]}
         blur={4}
       />
-
       <Environment preset="warehouse" />
     </>
   );

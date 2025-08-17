@@ -15,7 +15,7 @@ export default function Hero() {
       className="relative min-h-screen flex flex-col justify-end"
       aria-labelledby="hero-title"
     >
-      <div className="w-full max-w-none md:max-w-11/12 mx-auto pb-20 md:pb-10">
+      <div className="w-full max-w-none md:max-w-11/12 mx-auto pb-20 md:pb-10 pointer-events-none">
         <Title delay={0.8} />
         <Line />
         <div>

@@ -28,126 +28,69 @@ export default function Model(props: {
   }, [actions.CINEMA_4D_Main]);
 
   return (
-    <group ref={group} {...props} dispose={null}>
-      <group name="Sketchfab_Scene">
-        <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
-          <group
-            name="f85ff437812d471ca26a36bfdfd21a0efbx"
-            rotation={[Math.PI / 2, 0, 0]}
-          >
-            <group name="Object_2">
-              <group name="RootNode">
-                <group
-                  name="CINEMA_4D_Editor"
-                  position={[658.618, 597.36, 558.515]}
-                  rotation={[-Math.PI, 0.668, 2.551]}
-                >
-                  <group name="Object_5" />
-                </group>
-                <group name="Sphere">
-                  <mesh
-                    name="Sphere_Mat1_0"
-                    castShadow
-                    receiveShadow
-                    geometry={(nodes.Sphere_Mat1_0 as Mesh).geometry}
-                    material={materials["Mat.1"]}
-                  />
-                </group>
-                <group name="Tube">
-                  <mesh
-                    name="Tube_Mat_0"
-                    castShadow
-                    receiveShadow
-                    geometry={(nodes.Tube_Mat_0 as Mesh).geometry}
+    <>
+      <group ref={group} {...props} dispose={null}>
+        <group name="Sketchfab_Scene">
+          <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
+            <group
+              name="f85ff437812d471ca26a36bfdfd21a0efbx"
+              rotation={[Math.PI / 2, 0, 0]}
+            >
+              <group name="Object_2">
+                <group name="RootNode">
+                  <group
+                    name="CINEMA_4D_Editor"
+                    position={[658.618, 597.36, 558.515]}
+                    rotation={[-Math.PI, 0.668, 2.551]}
                   >
-                    <meshStandardMaterial
-                      color="#ffeca1"
-                      metalness={1}
-                      roughness={0.08}
+                    <group name="Object_5" />
+                  </group>
+                  <group name="Sphere">
+                    <mesh
+                      name="Sphere_Mat1_0"
+                      castShadow
+                      receiveShadow
+                      geometry={(nodes.Sphere_Mat1_0 as Mesh).geometry}
+                      material={materials["Mat.1"]}
                     />
-                  </mesh>
-                </group>
+                  </group>
+                  <group name="Tube">
+                    <mesh
+                      name="Tube_Mat_0"
+                      castShadow
+                      receiveShadow
+                      geometry={(nodes.Tube_Mat_0 as Mesh).geometry}
+                    >
+                      <meshStandardMaterial
+                        color="#ffeca1"
+                        metalness={1}
+                        roughness={0.08}
+                      />
+                    </mesh>
+                  </group>
 
-                <group name="Tube_2" rotation={[0, 0, Math.PI / 2]}>
-                  <mesh
-                    name="Tube_2_Mat_0"
-                    castShadow
-                    receiveShadow
-                    geometry={(nodes.Tube_2_Mat_0 as Mesh).geometry}
-                    material={materials.material}
-                  />
-                </group>
-                <group
-                  visible={false}
-                  name="Tube_3"
-                  rotation={[0, Math.PI / 2, 0]}
-                >
-                  <mesh
-                    name="Tube_3_Mat_0"
-                    castShadow
-                    receiveShadow
-                    geometry={(nodes.Tube_3_Mat_0 as Mesh).geometry}
-                    material={materials.material}
-                  />
-                </group>
-                <group
-                  visible={false}
-                  name="Tube_4"
-                  rotation={[0, Math.PI / 4, -Math.PI / 2]}
-                >
-                  <mesh
-                    name="Tube_4_Mat_0"
-                    castShadow
-                    receiveShadow
-                    geometry={(nodes.Tube_4_Mat_0 as Mesh).geometry}
-                    material={materials.material}
-                  />
-                </group>
-                <group
-                  visible={false}
-                  name="Tube_6"
-                  rotation={[0, Math.PI / 4, 0]}
-                >
-                  <mesh
-                    name="Tube_6_Mat_0"
-                    castShadow
-                    receiveShadow
-                    geometry={(nodes.Tube_6_Mat_0 as Mesh).geometry}
-                    material={materials.material}
-                  />
-                </group>
-                <group
-                  visible={false}
-                  name="Tube_5"
-                  rotation={[0, -Math.PI / 4, -Math.PI / 2]}
-                >
-                  <mesh
-                    name="Tube_5_Mat_0"
-                    castShadow
-                    receiveShadow
-                    geometry={(nodes.Tube_5_Mat_0 as Mesh).geometry}
-                    material={materials.material}
-                  />
-                </group>
-                <group
-                  visible={false}
-                  name="Tube_7"
-                  rotation={[0, -Math.PI / 4, 0]}
-                >
-                  <mesh
-                    name="Tube_7_Mat_0"
-                    castShadow
-                    receiveShadow
-                    geometry={(nodes.Tube_7_Mat_0 as Mesh).geometry}
-                    material={materials.material}
-                  />
+                  <group name="Tube_2" rotation={[0, 0, Math.PI / 2]}>
+                    <mesh
+                      name="Tube_2_Mat_0"
+                      castShadow
+                      receiveShadow
+                      geometry={(nodes.Tube_2_Mat_0 as Mesh).geometry}
+                      material={materials.material}
+                    />
+                  </group>
+                  <group name="Tube_1" visible={false} />
+                  <group visible={false} name="Tube_3" />
+                  <group visible={false} name="Tube_4" />
+                  <group visible={false} name="Tube_6" />
+                  <group visible={false} name="Tube_5" />
+                  <group visible={false} name="Tube_7" />
                 </group>
               </group>
             </group>
           </group>
         </group>
       </group>
-    </group>
+    </>
   );
 }
 

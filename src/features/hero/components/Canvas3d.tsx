@@ -4,9 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import Scene from "./Scene";
 import { useEffect, useRef, useState } from "react";
 import { useModelLoading } from "@/components/ModelLoadingProvider";
-import { PerformanceMonitor } from "@react-three/drei";
 import useScrollTrigger from "@/hooks/useScrollTrigger";
-import { Perf } from "r3f-perf";
 
 export default function Canvas3d() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -33,8 +31,6 @@ export default function Canvas3d() {
     return () => observer.disconnect();
   }, []);
 
-  const [dpr, setDpr] = useState(1.5);
-
   return (
     <figure className="absolute inset-0 -z-10 min-h-screen h-[110vw]">
       <Canvas
@@ -44,14 +40,9 @@ export default function Canvas3d() {
         gl={{
           stencil: false,
         }}
-        dpr={dpr}
+        dpr={1}
         frameloop={visible ? "always" : "never"}
       >
-        <Perf position="bottom-left" />
-        <PerformanceMonitor
-          onIncline={() => setDpr(1.5)}
-          onDecline={() => setDpr(1)}
-        ></PerformanceMonitor>
         <Scene />
       </Canvas>
     </figure>
