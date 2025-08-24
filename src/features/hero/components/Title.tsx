@@ -3,19 +3,12 @@
 import ClipUpText from "@/components/ui/ClipUpText";
 import { useRef } from "react";
 import { useModelLoading } from "@/components/ModelLoadingProvider";
-import useScrollTrigger from "@/hooks/useScrollTrigger";
+import { useGSAP, gsap } from "@/lib/gsap";
 
-export default function Title({
-  className,
-  delay,
-}: {
-  className?: string;
-  delay: number;
-}) {
+export default function Title({ delay }: { delay: number }) {
   const titleRef = useRef<HTMLDivElement>(null);
   const subTitleRef = useRef<HTMLDivElement>(null);
   const { shouldStartAnimations } = useModelLoading();
-  const { useGSAP, gsap } = useScrollTrigger();
   useGSAP(() => {
     if (!shouldStartAnimations) return;
 

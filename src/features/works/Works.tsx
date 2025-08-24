@@ -7,7 +7,8 @@ import { projects } from "@/constants";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { useRef, useState } from "react";
-import useScrollTrigger from "@/hooks/useScrollTrigger";
+import { useGSAP, gsap } from "@/lib/gsap";
+
 export default function Works() {
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const previewRef = useRef<HTMLDivElement>(null);
@@ -20,7 +21,7 @@ export default function Works() {
     x: 0,
     y: 0,
   });
-  const { useGSAP, gsap } = useScrollTrigger();
+
   useGSAP(() => {
     moveX.current = gsap.quickTo(previewRef.current, "x");
     moveY.current = gsap.quickTo(previewRef.current, "y");
@@ -51,7 +52,7 @@ export default function Works() {
     if (!previewRef.current) return;
     const halfWidth = window.innerWidth / 2;
     const leftEdge = -halfWidth;
-    const rightEdge = halfWidth;
+    const rightEdge = halfWidth - 400;
     // 0〜1の割合
     const ratio = (e.clientX - leftEdge) / (rightEdge - leftEdge);
     // ratio=0ならe.clientX, ratio=1ならe.clientX - offsetWidth

@@ -4,12 +4,11 @@ import { Canvas } from "@react-three/fiber";
 import Scene from "./Scene";
 import { useEffect, useRef, useState } from "react";
 import { useModelLoading } from "@/components/ModelLoadingProvider";
-import useScrollTrigger from "@/hooks/useScrollTrigger";
+import { useGSAP, gsap } from "@/lib/gsap";
 
 export default function Canvas3d() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { shouldStartAnimations } = useModelLoading();
-  const { useGSAP, gsap } = useScrollTrigger();
   useGSAP(() => {
     if (!shouldStartAnimations) return;
 
@@ -37,9 +36,6 @@ export default function Canvas3d() {
         ref={canvasRef}
         shadows
         camera={{ fov: 45, near: 0.1, far: 30, position: [0, 8, 20] }}
-        gl={{
-          stencil: false,
-        }}
         dpr={1}
         frameloop={visible ? "always" : "never"}
       >

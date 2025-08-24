@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import useScrollTrigger from "@/hooks/useScrollTrigger";
+import { useGSAP, ScrollTrigger } from "@/lib/gsap";
 
 export default function ServiceWrapper({
   children,
@@ -9,7 +9,6 @@ export default function ServiceWrapper({
   children: React.ReactNode;
 }) {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const { useGSAP, gsap, ScrollTrigger } = useScrollTrigger();
   useGSAP(() => {
     ScrollTrigger.create({
       trigger: sectionRef.current,
@@ -22,5 +21,9 @@ export default function ServiceWrapper({
     });
   }, []);
 
-  return <div ref={sectionRef}>{children}</div>;
+  return (
+    <div className="bg-background" ref={sectionRef}>
+      {children}
+    </div>
+  );
 }

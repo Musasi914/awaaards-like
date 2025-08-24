@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import useScrollTrigger from "@/hooks/useScrollTrigger";
+import { useGSAP, gsap } from "@/lib/gsap";
 
 export default function ServiceSummary() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -10,8 +10,6 @@ export default function ServiceSummary() {
   const titleService3Ref = useRef<HTMLDivElement>(null);
   const titleService4Ref = useRef<HTMLDivElement>(null);
   const titleService5Ref = useRef<HTMLDivElement>(null);
-
-  const { useGSAP, gsap } = useScrollTrigger();
 
   useGSAP(() => {
     const tl = gsap.timeline({

@@ -10,7 +10,6 @@ const aboutTexts = [
 ];
 
 export default function Hero() {
-  console.log("Hero");
   return (
     <section
       className="relative min-h-screen flex flex-col justify-end"

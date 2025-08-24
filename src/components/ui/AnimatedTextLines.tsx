@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useModelLoading } from "@/components/ModelLoadingProvider";
-import useScrollTrigger from "@/hooks/useScrollTrigger";
+import { useGSAP, gsap, ScrollTrigger } from "@/lib/gsap";
 
 export default function AnimatedTextLines({
   texts,
@@ -16,7 +16,6 @@ export default function AnimatedTextLines({
   delay?: number;
   isScrollTrigger?: boolean;
 }) {
-  const { useGSAP, gsap, ScrollTrigger } = useScrollTrigger();
   const appendClass = [];
   className && appendClass.push(className);
 

@@ -4,8 +4,7 @@ import { useRef, useState } from "react";
 import { useLenis } from "../provider/LenisProvider";
 import Image from "next/image";
 import Link from "next/link";
-import useScrollTrigger from "@/hooks/useScrollTrigger";
-import { useModelLoading } from "./ModelLoadingProvider";
+import { useGSAP, gsap, SplitText } from "@/lib/gsap";
 
 // メニューアイテムの型定義
 interface MenuItem {
@@ -36,18 +35,82 @@ const TAG_ITEMS: TagItem[] = [
   { id: "motion-craft", label: "Motion Craft", href: "#" },
 ];
 
+// メニューアイテムをレンダリング
+const RenderMenuItems = ({
+  copyContainersRef,
+}: {
+  copyContainersRef: React.RefObject<HTMLDivElement>;
+}) => (
+  <div ref={copyContainersRef} className="menu__col">
+    {MENU_ITEMS.map((item) => (
+      <div key={item.id} className="menu__link">
+        <Link
+          href={item.href}
+          className="text-4xl md:text-6xl font-accent leading-tight transition-opacity hover:opacity-50"
+        >
+          {item.label}
+        </Link>
+      </div>
+    ))}
+  </div>
+);
+
+// タグアイテムをレンダリング
+const RenderTagItems = ({
+  copyContainersRef,
+}: {
+  copyContainersRef: React.RefObject<HTMLDivElement>;
+}) => (
+  <div ref={copyContainersRef} className="menu__col">
+    {TAG_ITEMS.map((item) => (
+      <div key={item.id} className="menu__tag">
+        <Link
+          href={item.href}
+          className="text-lg md:text-2xl transition-opacity hover:opacity-50"
+        >
+          {item.label}
+        </Link>
+      </div>
+    ))}
+  </div>
+);
+
+// ハンバーガーアイコン
+const HamburgerIcon = ({
+  ref,
+  isOpen,
+}: {
+  ref: React.RefObject<HTMLDivElement>;
+  isOpen: boolean;
+}) => (
+  <div
+    ref={ref}
+    className="menu__toggle-icon relative w-12 h-12 flex flex-col justify-center items-center border border-[var(--menu-fg-secondary)] rounded-full"
+  >
+    <span
+      className={`absolute w-3.5 h-0.25 origin-center -translate-y-[3px] bg-[var(--menu-fg-secondary)] ${
+        isOpen ? "translate-y-[0] rotate-45 scale-110" : "-translate-y-[3px]"
+      }`}
+    />
+    <span
+      className={`absolute w-3.5 h-0.25 origin-center bg-[var(--menu-fg-secondary)] ${
+        isOpen ? "-translate-y-[0] -rotate-45 scale-110" : "translate-y-[3px]"
+      }`}
+    />
+  </div>
+);
+
 export default function Navbar() {
   const lenisRef = useLenis();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { useGSAP, gsap, SplitText } = useScrollTrigger();
 
   // Refs
-  const menuOverlayRef = useRef<HTMLDivElement>(null);
-  const menuMediaWrapperRef = useRef<HTMLDivElement>(null);
-  const copyContainersRef = useRef<HTMLDivElement>(null);
-  const menuToggleLabelRef = useRef<HTMLDivElement>(null);
-  const menuToggleIconRef = useRef<HTMLDivElement>(null);
-  const headerTitleRef = useRef<HTMLAnchorElement>(null);
+  const menuOverlayRef = useRef<HTMLDivElement>(null!);
+  const menuMediaWrapperRef = useRef<HTMLDivElement>(null!);
+  const copyContainersRef = useRef<HTMLDivElement>(null!);
+  const menuToggleLabelRef = useRef<HTMLDivElement>(null!);
+  const menuToggleIconRef = useRef<HTMLDivElement>(null!);
+  const headerTitleRef = useRef<HTMLAnchorElement>(null!);
 
   useGSAP(() => {
     let isAnimate = false;
@@ -134,62 +197,7 @@ export default function Navbar() {
         isAnimate = false;
       }
     });
-  });
-
-  // メニューアイテムをレンダリング
-  const renderMenuItems = () => (
-    <div ref={copyContainersRef} className="menu__col">
-      {MENU_ITEMS.map((item) => (
-        <div key={item.id} className="menu__link">
-          <Link
-            href={item.href}
-            className="text-4xl md:text-6xl font-accent leading-tight transition-opacity hover:opacity-50"
-          >
-            {item.label}
-          </Link>
-        </div>
-      ))}
-    </div>
-  );
-
-  // タグアイテムをレンダリング
-  const renderTagItems = () => (
-    <div ref={copyContainersRef} className="menu__col">
-      {TAG_ITEMS.map((item) => (
-        <div key={item.id} className="menu__tag">
-          <Link
-            href={item.href}
-            className="text-lg md:text-2xl transition-opacity hover:opacity-50"
-          >
-            {item.label}
-          </Link>
-        </div>
-      ))}
-    </div>
-  );
-
-  // ハンバーガーアイコン
-  const HamburgerIcon = () => (
-    <div
-      ref={menuToggleIconRef}
-      className="menu__toggle-icon relative w-12 h-12 flex flex-col justify-center items-center border border-[var(--menu-fg-secondary)] rounded-full"
-    >
-      <span
-        className={`absolute w-3.5 h-0.25 origin-center -translate-y-[3px] bg-[var(--menu-fg-secondary)] ${
-          isMenuOpen
-            ? "translate-y-[0] rotate-45 scale-110"
-            : "-translate-y-[3px]"
-        }`}
-      />
-      <span
-        className={`absolute w-3.5 h-0.25 origin-center bg-[var(--menu-fg-secondary)] ${
-          isMenuOpen
-            ? "-translate-y-[0] -rotate-45 scale-110"
-            : "translate-y-[3px]"
-        }`}
-      />
-    </div>
-  );
+  }, []);
 
   return (
     <header className="fixed w-full h-screen top-0 left-0 pointer-events-none overflow-hidden z-10">
@@ -214,7 +222,7 @@ export default function Navbar() {
               MENU
             </p>
           </div>
-          <HamburgerIcon />
+          <HamburgerIcon ref={menuToggleIconRef} isOpen={isMenuOpen} />
         </div>
       </div>
 
@@ -242,8 +250,8 @@ export default function Navbar() {
           {/* コンテンツセクション */}
           <nav className="flex-3 relative flex text-[var(--menu-fg-secondary)]">
             <div className="absolute md:top-1/2 left-1/2 -translate-x-1/2 md:-translate-y-1/2 w-full md:w-3/4 p-16 md:p-0 lg:p-16 flex flex-col md:flex-row md:items-end gap-8">
-              {renderMenuItems()}
-              {renderTagItems()}
+              <RenderMenuItems copyContainersRef={copyContainersRef} />
+              <RenderTagItems copyContainersRef={copyContainersRef} />
             </div>
 
             {/* フッター */}

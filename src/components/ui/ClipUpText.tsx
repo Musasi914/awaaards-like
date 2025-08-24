@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useModelLoading } from "@/components/ModelLoadingProvider";
-import useScrollTrigger from "@/hooks/useScrollTrigger";
+import { useGSAP, gsap, ScrollTrigger } from "@/lib/gsap";
 
 export default function ClipUpText({
   children,
@@ -19,7 +19,6 @@ export default function ClipUpText({
   const textRef = useRef<HTMLSpanElement>(null);
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const { shouldStartAnimations } = useModelLoading();
-  const { useGSAP, gsap, ScrollTrigger } = useScrollTrigger();
   useGSAP(() => {
     if (isMobile || !shouldStartAnimations) return;
     const textAnimation = gsap.from(textRef.current, {
