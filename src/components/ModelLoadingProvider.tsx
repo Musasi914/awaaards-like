@@ -41,6 +41,7 @@ export default function ModelLoadingProvider({
   const [isModelLoaded, setIsModelLoaded] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [shouldStartAnimations, setShouldStartAnimations] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   const setModelLoaded = useCallback((loaded: boolean) => {
     setIsModelLoaded(loaded);

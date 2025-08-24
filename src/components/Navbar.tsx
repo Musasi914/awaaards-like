@@ -5,6 +5,7 @@ import { useLenis } from "../provider/LenisProvider";
 import Image from "next/image";
 import Link from "next/link";
 import useScrollTrigger from "@/hooks/useScrollTrigger";
+import { useModelLoading } from "./ModelLoadingProvider";
 
 // メニューアイテムの型定義
 interface MenuItem {
@@ -39,6 +40,7 @@ export default function Navbar() {
   const lenisRef = useLenis();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { useGSAP, gsap, SplitText } = useScrollTrigger();
+
   // Refs
   const menuOverlayRef = useRef<HTMLDivElement>(null);
   const menuMediaWrapperRef = useRef<HTMLDivElement>(null);
@@ -58,7 +60,7 @@ export default function Navbar() {
     gsap.set(split.lines, { yPercent: 110 });
 
     const menuToggleBtn = document.querySelector(".menu__toggle-btn");
-    const main = document.querySelector("main");
+    // const main = document.querySelector("main");
     const tl = gsap.timeline({
       defaults: { ease: "power2.inOut", duration: 1 },
     });
@@ -73,13 +75,13 @@ export default function Navbar() {
         },
         "<"
       )
-      .to(
-        main,
-        {
-          y: "100vh",
-        },
-        "<"
-      )
+      // .to(
+      //   main,
+      //   {
+      //     y: "100vh",
+      //   },
+      //   "<"
+      // )
       .to(
         menuOverlayRef.current,
         {

@@ -5,6 +5,7 @@ import Scene from "./Scene";
 import { useEffect, useRef, useState } from "react";
 import { useModelLoading } from "@/components/ModelLoadingProvider";
 import useScrollTrigger from "@/hooks/useScrollTrigger";
+import { Perf } from "r3f-perf";
 
 export default function Canvas3d() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -43,6 +44,7 @@ export default function Canvas3d() {
         dpr={1}
         frameloop={visible ? "always" : "never"}
       >
+        <Perf />
         <Scene />
       </Canvas>
     </figure>
